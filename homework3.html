@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework3</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap');
+        div{
+            background-color:#ECF5FF;
+            font-family: 'Ubuntu', sans-serif;
+            font-size:32px;
+            margin:10% 10%;
+            border-radius: 20px;
+        }
+        .s{
+            width: 10%;
+            padding:5% 5% 0% 5%;
+            filter: grayscale(1); /*沒有任何色彩的黑白影像*/
+            
+        }
+        .n {
+            width: 10%;
+            padding:5% 5% 0% 5%;
+            filter: grayscale(0);  /*顏色不變*/
+        }
+        p{
+            padding-bottom:5%; 
+        }
+        
+    </style>
+    <script>
+        let isJudge = false;
+        document.addEventListener("DOMContentLoaded",function(){
+            loadStars(5);
+        })
+
+        function loadStars(num){
+            let imgDiv = document.getElementById("imgDiv");
+            for(let i=1;i<=num;i++){
+                let imgStar = document.createElement("img");
+                imgStar.setAttribute("src", "images/star1.png");
+                imgStar.setAttribute("id", `star${i}`);
+                imgStar.setAttribute("class", "s");
+                imgStar.addEventListener("mouseover", mouseOver.bind(null, i));  //事件繫結，滑鼠滑入
+                imgStar.addEventListener("mouseout", mouseOut.bind(null, num));    //事件繫結，滑鼠滑出
+                imgStar.addEventListener("click", click.bind(null, i));  //事件繫結，點擊
+                imgStar.addEventListener("dblclick", doubleClick.bind(null, num));    //事件繫結，雙重點擊
+                imgDiv.appendChild(imgStar);
+            }
+        }
+        
+        function mouseOver(num){
+            if(isJudge){
+                return;
+            }
+            for(let i=1;i<=num;i++){
+                document.getElementById(`star${i}`).className = "n";
+            }
+            document.getElementById("score").innerHTML=`Score: ${num}`;
+        }
+        function mouseOut(num){
+            if(isJudge){
+                return;
+            }
+            for(let i=1;i<=num;i++){
+                document.getElementById(`star${i}`).className = "s";
+            }
+            document.getElementById("score").innerHTML=`Score: 0`;
+        }
+        function click(num){
+            if(isJudge){
+                return;
+            }
+            mouseOver(num);
+            isJudge = true;
+        }
+        function doubleClick(num){
+            isJudge = false;
+            mouseOut(num);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div id="imgDiv"></div>
+        <div>
+            <p>
+                Click star to score for the lesson,
+                double click to cancel.
+            </p>
+            <p id="score">
+                Score: 0
+            </p>
+        </div>
+    </div>
+</body>
+</html>

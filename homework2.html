@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework2</title>
+    <style>
+        /* 英文字型 */
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap');
+        /* 中文字型 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Ubuntu:wght@400;500&display=swap');
+        
+        form{
+            margin: 10% 15%;
+        }
+        .fs1{
+            width:700px;
+            margin:0px 100px ;
+            border:5px solid #BEBEBE;
+            border-radius: 20px;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 500;
+            background-color:#FFFCEC;
+        }
+        .lgd1{
+            margin-left:50px;
+            font-weight: bold;
+            color:#408080;
+        }
+        .p1{
+            font-size:1.5em;
+            color:#5CADAD;
+            margin-left:60px;
+        }
+        .p2{
+            color:#84C1FF;
+            margin-left:60px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .c1{
+            color:#8E8E8E;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        span{
+            color:#6C6C6C;
+        }
+        hr{
+            width:600px;
+            border:2px dashed #BEBEBE;
+        }
+    </style>
+    <script>
+        function checkName(){
+            let theNameObj=document.getElementById("name");
+            let theNameObjVal=theNameObj.value;
+            let theNameObjValLen=theNameObjVal.length;
+            let sp=document.getElementById("namesp");
+
+            if(theNameObjValLen == 0){
+                sp.innerHTML = "<img src='images/incorrect.png'>You must enter!!";
+                return;
+            }else if(theNameObjValLen < 2){
+                sp.innerHTML = "<img src='images/incorrect.png'>Password length must be greater than or equal to 2"
+                return;
+            }
+            for(let i=0; i<theNameObjValLen; i++){
+                let ch=theNameObjVal.charCodeAt(i)
+                if(ch<=0x4e00 || ch>=0x9fff){
+                    sp.innerHTML =  "<img src='images/incorrect.png'>You must enter Chinese."
+                    return;
+                }
+            }
+            sp.innerHTML = "<img src='images/correct.png'>Correct!!";
+        }
+
+        function checkPwd(){
+            let thePwdObj=document.getElementById("pwd");
+            let thePwdObjVal=thePwdObj.value;
+            let thePwdObjValLen=thePwdObjVal.length;
+            let sp=document.getElementById("pwdsp");
+            let flag1=false,flag2=false,flag3=false;
+            let specialStr = "!@#$%^&*";
+            if(thePwdObjValLen == 0){
+                sp.innerHTML = "<img src='images/incorrect.png'>You must enter!!"
+                return;
+            }else if(thePwdObjValLen < 6){
+                sp.innerHTML = "<img src='images/incorrect.png'>Password length must be greater than or equal to 6"
+                return;
+            }
+            thePwdObjVal = thePwdObjVal.toUpperCase();
+            for(let i=0;i<thePwdObjValLen;i++){
+                let ch = thePwdObjVal.charAt(i);
+                if(ch>="A" && ch<="Z"){
+                    flag1=true;
+                }else if(ch>="0" && ch<= "9"){
+                    flag2=true
+                }else if(-1 !== specialStr.indexOf(ch)){
+                    flag3=true;
+                }
+
+                if(flag1 && flag2 && flag3){
+                    sp.innerHTML = "<img src='images/correct.png'>Correct!!"
+                    return;
+                }
+            }
+            sp.innerHTML = "<img src='images/incorrect.png'>Password should include English, number, special char";
+        }
+
+        function checkDate(){
+            let theDateObj=document.getElementById("date");
+            let theDateVal=theDateObj.value;
+            let theDate=new Date(theDateVal)
+            let sp=document.getElementById("datesp");
+            if(theDate.getDate() != parseInt(theDateVal.split("/")[2])){
+                sp.innerHTML = "<img src='images/incorrect.png'>Invalid date"
+                return;
+            }
+            sp.innerHTML = "<img src='images/correct.png'>Correct!!"
+        }
+        
+        document.addEventListener("DOMContentLoaded",function(){
+            document.getElementById("name").addEventListener("blur",checkName,false);
+            document.getElementById("name").addEventListener("change",checkName,false);
+            document.getElementById("pwd").addEventListener("blur",checkPwd,false);
+            document.getElementById("pwd").addEventListener("change",checkPwd,false);
+            document.getElementById("date").addEventListener("blur",checkDate,false);
+            document.getElementById("date").addEventListener("change",checkDate,false);
+        })
+        
+    </script>
+</head>
+<body>
+    <form>
+        <fieldset class="fs1">
+            <legend class="lgd1"><h1>Form Check</h1></legend>
+            <p class="p1">
+                <label for="account">Name:</label>
+                <input class="c1" type="text" id="name" name="name" size="20" >
+                <span id="namesp"></span><br/>
+            </p>
+            <p class="p2">
+                (格式: 1.不可空白 2.至少2個字以上 3.必須全部為中文字)
+            </p>
+            <hr>
+            <p class="p1">
+                <label for="pwd">Password:</label>
+                <input type="password" id="pwd" name="pwd" size="20">
+                <span id="pwdsp"></span><br/>
+            </p>
+            <p class="p2">
+                (格式: 1.不可空白 2.至少6個字以上且必須包含英數字、特殊字元[!@#$%^&*])
+            </p>
+            <hr>
+            <p class="p1">
+                <label for="date">Date:</label>
+                <input class="c1" type="text" id="date" name="pwd" size="20">
+                <span id="datesp"></span><br/>
+            </p>
+            <p class="p2">
+                (格式: 西元年/月/日 [yyyy/mm/dd])
+            </p>
+        </fieldset>
+    </form>
+</body>
+</html>

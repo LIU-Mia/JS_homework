@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap');
+        
+        
+        table {
+            border-collapse: collapse;
+            margin:15%;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 1.5em;
+        }
+        td {
+            width:70px;
+            border-radius:10px;
+            background-color:#984B4B;
+            color:#E0E0E0;
+            text-align: center;
+            padding:20px;
+        }
+    </style>
+    
+    <script>
+        let i,j,k
+        document.write(`<table><tr>`)
+        for (i = 2; i < 10; i++) {
+            document.write(`<td>`)
+            for (j = 1; j < 10; j++) {
+                document.write(`${i}*${j}=${i*j}<br>`)
+            }
+            document.write(`</td>`)
+        }
+        document.write(`</tr></table>`) //可以改成innerHTML
+
+
+        // document.write(`<br>`)
+        // let dataArr = [];
+        // for (let i = 2; i < 10; i++) {
+        //     let rowData = "";
+        //     for (let j = 1; j < 10; j++) {
+        //         rowData += `${i}*${j}=${i*j}<br>`;
+        //     }
+        //     dataArr.push(rowData);
+        // }
+
+        // document.write(
+        //     `<table>
+        //         <tr>
+        //             <td>${dataArr[0]}</td>
+        //             <td>${dataArr[1]}</td>
+        //             <td>${dataArr[2]}</td>
+        //             <td>${dataArr[3]}</td>
+        //             <td>${dataArr[4]}</td>
+        //             <td>${dataArr[5]}</td>
+        //             <td>${dataArr[6]}</td>
+        //             <td>${dataArr[7]}</td>
+        //         </tr>
+        //     </table>`
+        // )
+    </script>
+</head>
+
+<body>
+    
+</body>
+
+</html>
